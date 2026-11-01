@@ -1,0 +1,30 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><title>Reloj</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Antonio:wght@200&family=Jost:wght@300&display=swap" rel="stylesheet">
+<style>
+html,body{margin:0;height:100%;background:#000;overflow:hidden;font-family:"Helvetica Neue",Arial,sans-serif;color:#fff}
+.bg{position:fixed;inset:0;background-size:cover;background-position:center 62%;opacity:0;transition:opacity 3s ease}
+.bg.on{opacity:1}
+#img{background-image:url(fondo.webp);animation:kb 120s ease-in-out infinite alternate;will-change:transform}
+@keyframes kb{from{transform:scale(1)}to{transform:scale(1.06)}}
+.shade{position:fixed;inset:0;background:linear-gradient(to top,rgba(0,0,0,.35),rgba(0,0,0,0) 35%)}
+.clock{position:fixed;left:5vw;bottom:7vh;text-shadow:0 2px 20px rgba(0,0,0,.45)}
+#t{font-family:"Antonio","Arial Narrow",sans-serif;font-size:7vw;font-weight:200;line-height:1;letter-spacing:.01em;opacity:.95}
+#d{font-family:"Jost",Arial,sans-serif;font-size:.95vw;font-weight:300;opacity:.8;margin-top:1.4vh;margin-left:.3vw;text-transform:uppercase;letter-spacing:.35em}
+</style></head><body>
+<div class="bg on" id="img"></div>
+<video id="v" src="keepalive.mp4" autoplay muted loop playsinline style="position:fixed;right:0;bottom:0;width:2px;height:2px;opacity:.01"></video><div class="shade"></div>
+<div class="clock"><div id="t"></div><div id="d"></div></div>
+<script>
+var dias=["domingo","lunes","martes","miércoles","jueves","viernes","sábado"],
+meses=["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
+function pad(n){return n<10?"0"+n:n}
+function tick(){var n=new Date();document.getElementById("t").textContent=pad(n.getHours())+":"+pad(n.getMinutes());
+document.getElementById("d").textContent=dias[n.getDay()]+", "+n.getDate()+" de "+meses[n.getMonth()];}
+tick();setInterval(tick,1000);
+function next(){var url="https://picsum.photos/1920/1080?random="+Date.now();var img=new Image();
+img.onload=function(){var nx=layers[1-cur];nx.style.backgroundImage="url("+url+")";nx.className="bg on";layers[cur].className="bg";cur=1-cur;};
+img.src=url;}
+var v=document.getElementById("v");v.addEventListener("ended",function(){v.currentTime=0;v.play();});setInterval(function(){if(v.paused)v.play();},5000);
+function fs(){var e=document.documentElement,f=e.requestFullscreen||e.webkitRequestFullscreen;if(f&&!(document.fullscreenElement||document.webkitFullscreenElement))f.call(e);}
+document.addEventListener("keydown",fs);document.addEventListener("click",fs);
+</script></body></html>
