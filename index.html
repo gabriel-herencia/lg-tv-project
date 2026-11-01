@@ -4,15 +4,14 @@
 html,body{margin:0;height:100%;background:#000;overflow:hidden;font-family:"Helvetica Neue",Arial,sans-serif;color:#fff}
 .bg{position:fixed;inset:0;background-size:cover;background-position:center 62%;opacity:0;transition:opacity 3s ease}
 .bg.on{opacity:1}
-#img{background-image:url(fondo.webp);animation:kb 120s ease-in-out infinite alternate;will-change:transform}
-@keyframes kb{from{transform:scale(1)}to{transform:scale(1.06)}}
+#img{background-image:url(fondo.webp)}
 .shade{position:fixed;inset:0;background:linear-gradient(to top,rgba(0,0,0,.35),rgba(0,0,0,0) 35%)}
 .clock{position:fixed;left:5vw;bottom:7vh;text-shadow:0 2px 20px rgba(0,0,0,.45)}
 #t{font-family:"Antonio","Arial Narrow",sans-serif;font-size:7vw;font-weight:200;line-height:1;letter-spacing:.01em;opacity:.95}
 #d{font-family:"Jost",Arial,sans-serif;font-size:.95vw;font-weight:300;opacity:.8;margin-top:1.4vh;margin-left:.3vw;text-transform:uppercase;letter-spacing:.35em}
 </style></head><body>
 <div class="bg on" id="img"></div>
-<video id="v" src="keepalive.mp4" autoplay muted loop playsinline style="position:fixed;right:0;bottom:0;width:2px;height:2px;opacity:.01"></video><div class="shade"></div>
+<video class="bg on" id="v" src="fondo.mp4" autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover"></video><div class="shade"></div>
 <div class="clock"><div id="t"></div><div id="d"></div></div>
 <script>
 var dias=["domingo","lunes","martes","miércoles","jueves","viernes","sábado"],
